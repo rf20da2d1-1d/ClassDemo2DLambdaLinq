@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using ClassDemo2DLambdaLinq.model;
 
 namespace ClassDemo2DLambdaLinq
@@ -67,9 +68,44 @@ namespace ClassDemo2DLambdaLinq
         {
             List<Bil> biler = new List<Bil>(MockDataFactory.GetBiler);
 
+            var res =
+                from b in biler
+                where b.Farve == "rød"
+                select b;
+
+            //foreach (var bil in res)
+            //{
+            //    Console.WriteLine(bil);
+            //}
+
+            var res2 = biler.Where(b => b.Farve == "rød").Select(b => new {b.RegistreringsNr, b.Pris});
+
+            //foreach (var bil in res2)
+            //{
+            //    Console.WriteLine(bil);
+            //}
+
+            var res3 =
+                from b in biler
+                group b by b.Farve
+                into bg
+                select bg;
+
+
+            foreach (var gruppe in res3)
+            {
+                Console.WriteLine("Farve - {0} ", gruppe.Key);
+                Console.WriteLine("{0} -- {1} -- {2}", "ID", "Pris", "Reg.Nr");
+
+                foreach (Bil b in gruppe)
+                {
+                    Console.WriteLine($"{b.Id} -- {b.Pris} -- {b.RegistreringsNr}");
+                }
+
+            }
+
+
             
-
-
 
         }
 

@@ -7,9 +7,9 @@ namespace ClassDemo2DLambdaLinq
         static void Main(string[] args)
         {
             LambdaWorker worker = new LambdaWorker();
-            worker.StartLambda();
+            //worker.StartLambda();
 
-            //worker.StartLinq();
+            worker.StartLinq();
 
             Console.ReadLine();
         }
